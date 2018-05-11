@@ -1,0 +1,4 @@
+public abstract class Decorator extends player {
+    public void Set_Player () {
+}
+}
