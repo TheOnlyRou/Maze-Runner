@@ -1,0 +1,6 @@
+public class ArmorDecorator extends Decorator{
+    public void Get_Player();{
+}
+    public void Set_Armor() ;{
+    }
+    }
