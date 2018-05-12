@@ -51,6 +51,7 @@ public class InputHandler implements KeyListener {
     public Key left = new Key();
     public Key right  = new Key();
     public Key space  = new Key();
+    public Key p  = new Key();
 
     @Override
     public void keyTyped(KeyEvent ke) {
@@ -89,7 +90,12 @@ public class InputHandler implements KeyListener {
         if(keyCode == KeyEvent.VK_RIGHT  || keyCode == KeyEvent.VK_D)
         {
             right.toggle(isPressed);
-        }                
+        }
+        if(keyCode == KeyEvent.VK_P)
+        {
+            p.toggle(isPressed);
+        }        
+        
     }
     
 }

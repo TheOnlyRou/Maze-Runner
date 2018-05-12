@@ -1,12 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 
  */
 package Maze.view;
 
 import Maze.controller.InputHandler;
 import Maze.view.GFX.Colours;
+import Maze.view.GFX.Font;
 import Maze.view.GFX.Screen;
 import Maze.view.GFX.SpriteSheet;
 import java.awt.Canvas;
@@ -18,15 +17,17 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Maze.model.customLevel;
+import Maze.model.entities.Player;
 
 /**
  *
- * @author user
+ * This is the game canvas class that contains nearly all the visuals and where the main movement lies.
  */
 public class GameWindow extends Canvas implements Runnable{
-    public static final int WIDTH = 160;
-    public static final int HEIGHT = WIDTH/12*9;
-    public static final int SCALE = 5;
+    public static final int WIDTH = 200;
+    public static final int HEIGHT = 200;
+    public static final int SCALE = 3;
     public boolean running=false;
     public int tickCount=0;
     
@@ -38,12 +39,15 @@ public class GameWindow extends Canvas implements Runnable{
     private Screen screen;
     public InputHandler input;
     
+    public Player player;
+    
+    public customLevel level;
+    
     public GameWindow() throws InterruptedException
     {
         setMinimumSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
         setMaximumSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
-        setPreferredSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
-        
+        setPreferredSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));        
     }
     
     public void init()
@@ -64,9 +68,11 @@ public class GameWindow extends Canvas implements Runnable{
                 }
             }
         }
-        screen = new Screen(WIDTH,HEIGHT,new SpriteSheet("\\SpriteSheet2.png"));
+        screen = new Screen(WIDTH,HEIGHT,new SpriteSheet("\\SpriteSheet9.png"));
         input = new InputHandler(this);
-        
+        level = new customLevel("\\levels\\Level1.png");
+        player = new Player(level,0,0,input);
+        level.addEntity(player);
     }    
     
     public synchronized void start()
@@ -132,34 +138,36 @@ public class GameWindow extends Canvas implements Runnable{
     
     public void tick()
     {
-	tickCount++;
-        if(input.up.isPressed())
-        {
-            screen.yOffset--;
-            System.out.println("up");
-        }
-        if(input.down.isPressed())
-        {
-            screen.yOffset++;
-            System.out.println("down");
-        }
-        if(input.left.isPressed())
-        {
-            screen.xOffset--;
-            System.out.println("left");
-        }
-        if(input.right.isPressed())
-        {
-            screen.xOffset++;
-            System.out.println("right");
-        }       
+	tickCount++;    
         if(input.space.isPressed())
         {
             /* PEW PEW PEW */
             System.out.println("space");
+        }
+        if(input.p.isPressed())
+        {
+            /* pause pls */
+            System.out.println("pause");
         }        
+
+        level.tick();
     }
     
+    
+    /* Note as to the Colouring algorithm:
+        
+        The Colors produced from the Colour Class are used to paint the grayscale components rendered from the spritesheet by
+        this method and other similar methods in other classes. What it does is detect the shade of black; black/dark gray/ light gray/ white
+        and maps the colors given according to it.
+    
+        For instance, if the screen is all black and the sent color to the Colour class is (000,......), the rendered object will be black,
+        whereas(100,....) will give the black component a slight red shade. increasing the first number up to 5 gives a higher shade.
+        Same apply to the dark gray (...,xxx,.....), light gray (...,....,xxx,...) and white (...,....,...,xxx)
+    
+        Thus, if the spritesheet component being rendered is white, the black, dark gray, light gray colour components are useless since they aren't
+        actually there in the spritesheet (we render the background colour with -1 to remove it)
+    
+    */
     public void render()
     {
         /* BufferStrategy to prevent Flickering of the screen*/
@@ -169,15 +177,32 @@ public class GameWindow extends Canvas implements Runnable{
             return;
 	}
         
+        int xOffset = player.x-(screen.width/2);
+        int yOffset = player.y-(screen.height/2);
+        level.renderTiles(screen, xOffset,yOffset);
+        
+        level.renderEntities(screen);
+        
+        /*   For Testing Purposes
+        
         for(int y=0; y<32;y++)
         {
             for(int x =0; x<32; x++)
             {
-                screen.render(x<<3, y<<3, 0, Colours.get(555,500,050,005));
+                boolean flipX = x%2 == 1;
+                boolean flipY = y%2 == 1;
+                screen.render(x<<3, y<<3, 0, Colours.get(555,500,050,005),flipX,flipY);
             }
         }
-		
-           for(int y=0; y<screen.height;y++)
+	
+        String msg = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String msg1 = "abcdefghijklmnopqrstuvwxyz";
+        String msg2= "!@#$%^%^&*()-+= / ., ><";
+        Font.render(msg, screen, 30, 30, Colours.get(-1, -1, -1, 555));
+        Font.render(msg1, screen, 30, 60, Colours.get(-1, -1, -1, 555));
+        Font.render(msg2, screen, 30, 90, Colours.get(-1, -1, -1, 555));
+        */
+        for(int y=0; y<screen.height;y++)
         {
             for(int x =0; x<screen.width; x++)
             {

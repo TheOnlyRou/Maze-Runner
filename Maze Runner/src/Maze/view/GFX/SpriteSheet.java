@@ -11,7 +11,10 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author user
+ * This class manages spritesheets we make. Spritesheets are like images, but divided into sections of smaller images.
+ * They are commonly used in 2D games to reduce memory usage and save space.
+ * Our Sprite sheets contain the player models, the textures of the walls
+ * and the font used for typing onto the canvas
  */
 public class SpriteSheet {
     public String path;
