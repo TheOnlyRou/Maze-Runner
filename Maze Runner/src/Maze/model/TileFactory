@@ -1,0 +1,39 @@
+public class TileFactory {
+
+    /**
+     *
+     * @param shapeType
+     * @return
+     */
+    public Type getType(String shapeType){
+      if(shapeType == null){
+         return null;
+      }		
+      if(shapeType.equalsIgnoreCase("WoodWall")){
+         return new WoodWall();
+         
+      } else if(shapeType.equalsIgnoreCase("NapalmBomb")){
+         return new NapalmBomb();
+         
+      } else if(shapeType.equalsIgnoreCase("HPPickup")){
+         return new HPPickup();
+      }
+      else if(shapeType.equalsIgnoreCase("EmptyTile")){
+         return new EmptyTile();
+         
+      } else if(shapeType.equalsIgnoreCase("ConcreteWall")){
+         return new ConcreteWall();
+      }else if(shapeType.equalsIgnoreCase("AtomicBomb")){
+         return new AtomicBomb();
+         
+      } else if(shapeType.equalsIgnoreCase("BulletPickup")){
+         return new BulletPickup();
+      }
+       else if(shapeType.equalsIgnoreCase("ArmorPickup")){
+         return new ArmorPickup();
+      }
+      
+      return null;
+   }
+    
+}
