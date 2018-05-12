@@ -1,0 +1,23 @@
+public class FactoryPattern {
+
+   public static void main(String[] args) {
+      TileFactory shapeFactory;
+       shapeFactory = new TileFactory();
+      Type shape1 = shapeFactory.getType("WoodWall");
+      shape1.add();
+      Type shape2 = shapeFactory.getType("NapalmBomb");
+      shape2.add();
+      Type shape3 = shapeFactory.getType("HPPickup");
+      shape3.add();
+       Type shape4 = shapeFactory.getType("ConcreteWall");
+      shape4.add();
+      Type shape5 = shapeFactory.getType("AtomicBomb");
+      shape5.add();
+      Type shape6 = shapeFactory.getType("BulletPickup");
+      shape6.add();
+       Type shape7 = shapeFactory.getType("EmptyTile");
+      shape7.add();
+      Type shape8 = shapeFactory.getType("ArmorPickup");
+      shape8.add();
+   }
+}
