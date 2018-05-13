@@ -45,10 +45,19 @@ public class customLevel {
     
     public void tick()
     {
-           for(Entity e: entities)
+        for(Entity e: entities)
         {
             e.tick();
-        }       
+        }
+        
+        for(Tile t: Tile.tiles)
+        {
+           if(t==null)
+           {
+               break;
+           }
+           t.tick();
+        }
     }
     
     public void generateLevel()
@@ -132,7 +141,8 @@ public class customLevel {
     
     private void loadTiles()
     {
-        int[] tileColours = this.image.getRGB(0,0,width,height,null,0,width);
+        //
+        int[] tileColours = this.image.getRGB(0,0,width,height,null,0,image.getWidth());
         for(int y=0; y<height;y++)
         {
             for(int x=0;x<width;x++)

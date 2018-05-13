@@ -19,6 +19,8 @@ public class MainWindow extends javax.swing.JFrame {
     GameWindow game = new GameWindow();
     
     public MainWindow() throws InterruptedException {
+        
+        this.setVisible(true);
         setIconImage(new ImageIcon(getClass().getResource("icon.png")).getImage());
         add(game);
         pack();
@@ -31,7 +33,10 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
         jProgressBar1.setValue(100);
         jProgressBar2.setValue(100);
+
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,94 +63,148 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Maze Runner");
         setPreferredSize(new java.awt.Dimension(730, 700));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Minecraft", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("HP");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(110, 50, 44, 37);
 
         jProgressBar1.setValue(90);
         jProgressBar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, 30));
+        getContentPane().add(jProgressBar1);
+        jProgressBar1.setBounds(160, 50, 152, 30);
 
         jProgressBar2.setValue(80);
         jProgressBar2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(jProgressBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, -1, 30));
+        getContentPane().add(jProgressBar2);
+        jProgressBar2.setBounds(450, 50, 152, 30);
 
         jLabel4.setFont(new java.awt.Font("Minecraft", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Bullets");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, -1, -1));
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(220, 100, 124, 37);
 
         jLabel3.setFont(new java.awt.Font("Minecraft", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Armor");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, -1, -1));
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(340, 50, 110, 37);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bullets.png"))); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 102, -1, 30));
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(350, 102, 32, 30);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bullets.png"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 102, -1, 30));
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(365, 102, 32, 30);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bullets.png"))); // NOI18N
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 102, -1, 30));
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(380, 102, 32, 30);
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bullets.png"))); // NOI18N
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 102, -1, 30));
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(395, 102, 32, 30);
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bullets.png"))); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 102, -1, 30));
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(410, 102, 32, 30);
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bullets.png"))); // NOI18N
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 102, -1, 30));
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(425, 102, 32, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/UIBACK.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, -1));
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 730, 730);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new MainWindow().setVisible(true);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
+   
+    private void HideAll()
+    {
+        jLabel2.setVisible(false);
+        jLabel3.setVisible(false);
+        jLabel4.setVisible(false);
+        jLabel5.setVisible(false);
+        jLabel6.setVisible(false);
+        jLabel7.setVisible(false);
+        jLabel8.setVisible(false);
+        jLabel9.setVisible(false);
+        jLabel10.setVisible(false);
+        jProgressBar1.setVisible(false);
+        jProgressBar2.setVisible(false);
+        
     }
+    
+
+    public void setBullets(int bullets)
+    {
+        switch(bullets){
+            case 0:
+                jLabel5.setVisible(false);
+                jLabel6.setVisible(false);
+                jLabel7.setVisible(false);
+                jLabel8.setVisible(false);
+                jLabel9.setVisible(false);
+                jLabel10.setVisible(false);
+                break;
+            case 1:
+                jLabel5.setVisible(true);
+                jLabel6.setVisible(false);
+                jLabel7.setVisible(false);
+                jLabel8.setVisible(false);
+                jLabel9.setVisible(false);
+                jLabel10.setVisible(false);
+            case 2:
+                jLabel5.setVisible(true);
+                jLabel6.setVisible(true);
+                jLabel7.setVisible(false);
+                jLabel8.setVisible(false);
+                jLabel9.setVisible(false);
+                jLabel10.setVisible(false);
+                break;
+            case 3:
+                jLabel5.setVisible(true);
+                jLabel6.setVisible(true);
+                jLabel7.setVisible(true);
+                jLabel8.setVisible(false);
+                jLabel9.setVisible(false);
+                jLabel10.setVisible(false);
+                break;
+            case 4:
+                jLabel5.setVisible(true);
+                jLabel6.setVisible(true);
+                jLabel7.setVisible(true);
+                jLabel8.setVisible(true);
+                jLabel9.setVisible(false);
+                jLabel10.setVisible(false);
+                break;
+            case 5:
+                jLabel5.setVisible(true);
+                jLabel6.setVisible(true);
+                jLabel7.setVisible(true);
+                jLabel8.setVisible(true);
+                jLabel9.setVisible(true);
+                jLabel10.setVisible(false);
+                break;
+            case 6:
+                jLabel5.setVisible(true);
+                jLabel6.setVisible(true);
+                jLabel7.setVisible(true);
+                jLabel8.setVisible(true);
+                jLabel9.setVisible(true);
+                jLabel10.setVisible(true);
+                break;                
+                
+                
+        }
+    }
+        
     
    
 

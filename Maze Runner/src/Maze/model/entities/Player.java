@@ -6,9 +6,11 @@
 package Maze.model.entities;
 
 import Maze.controller.InputHandler;
+import Maze.model.Tile;
 import Maze.model.customLevel;
 import Maze.view.GFX.Colours;
 import Maze.view.GFX.Screen;
+import Maze.view.MainWindow;
 
 /**
  *
@@ -19,6 +21,7 @@ public class Player extends MovingEntity {
 
     private InputHandler input;
     private int colour = Colours.get(-1, 111, 511,543);
+    private boolean isShooting;
     
     public Player(customLevel level, int x, int y, InputHandler input)
     {
@@ -68,6 +71,21 @@ public class Player extends MovingEntity {
         
         return false;
     }
+    
+    @Override
+    public void move(int xa, int ya){
+        super.move(xa, ya);
+
+        Tile lastTile= level.getTile((this.x+x)>>3,(this.y+y)>>3);
+        Tile newTile= level.getTile((this.x+x +xa)>>3,(this.y+y+ya)>>3);
+        
+        if(!lastTile.equals(newTile) && newTile.doesDamage())
+        {
+            
+        }
+    }
+    
+    
 
     @Override
     public void tick() {
@@ -89,6 +107,13 @@ public class Player extends MovingEntity {
         if(input.left.isPressed())
         {
             xa--;
+        }      
+        if(input.space.isPressed())
+        {
+            this.isShooting = true;
+        }
+        else{
+            this.isShooting=false;
         }
         if(xa!=0 || ya!=0)
         {
@@ -98,6 +123,7 @@ public class Player extends MovingEntity {
         else{
             isMoving=false;
         }
+        shoot();
     }
 
     @Override
@@ -129,6 +155,53 @@ public class Player extends MovingEntity {
         screen.render(xOffset + (modifier*flipBot), yOffset + modifier, xTile + (yTile+1)*32, colour,flipBot,scale);
         
         screen.render(xOffset + modifier - (modifier*flipBot) ,yOffset + modifier, (xTile+1) + (yTile+1)*32, colour,flipBot,scale);
+    }
+    
+    public void shoot()
+    {
+        if(isShooting)
+        {
+            System.out.println("PEW");
+            Bullet b = new Bullet(this.level,this.x,this.y);
+        }
+        
+        /*if(hasCollided(xa,ya))
+        {
+            System.out.println(bullets);
+            Tile lastTile = level.getTile((this.x+x)>>3,(this.y+y)>>3);
+            Tile newTile = level.getTile((this.x+x)>>3,(this.y+y)>>3);
+
+            switch(movingDir)
+            {
+                case 0:
+                    newTile= level.getTile((this.x+x)>>3,(this.y+y-1)>>3);
+                    break;
+                case 1:
+                    newTile= level.getTile((this.x+x)>>3,(this.y+y+1)>>3);
+                    break;
+                case 2:
+                    newTile= level.getTile((this.x+x-1)>>3,(this.y+y)>>3);
+                    break;                    
+                case 3:
+                    newTile= level.getTile((this.x+x+1)>>3,(this.y+y)>>3);
+                    break;                    
+            }
+            if(!lastTile.equals(newTile) && newTile.isDestructible())
+            {
+                tileCheck: for(Tile t : Tile.tiles)
+                {
+                    if(newTile.equals(t))
+                    {
+                        level.alterTile(xa, ya, newTile);
+                    }
+                }
+            }
+            bullets--;
+        }
+        else
+        {
+             //produce sound tick tick and do nothing
+        }*/
     }
     
 }

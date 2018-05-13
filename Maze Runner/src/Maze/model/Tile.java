@@ -19,14 +19,20 @@ public abstract class Tile {
     public static final Tile VOID = new StoneTile(0,0,0,Colours.get(000,-1,-1,-1), 0xFF000000);
     public static final Tile STONE = new StoneTile(1,1,0,Colours.get(100,333,-1,-1), 0xFF555555);
     public static final Tile SAND = new BasicTile(2,2,0,Colours.get(440,441,541,440), 0xFFD4C62C);
-    public static final Tile BOMB = null;
-    public static final Tile WOOD = null;
+    public static final Tile FIRE = new AnimatedTile(3,new int[][]{{0,2},{1,2},{0,2}},Colours.get(440,510,521,555), 0xFFF24726,1000);
+    public static final Tile WOOD = new WoodTile(4,4,0,Colours.get(110,110,110,100), 0xFF664D1E);    
+    public static final Tile BOMB = new AnimatedTile(5,new int[][]{{0,3},{1,3},{2,3},{0,3}},Colours.get(440,510,521,555), 0xFFCE2CD4,1000);
     private int levelColour;
     protected byte id;
     protected boolean solid;
     protected boolean destructible;
+
+    public boolean doesDamage() {
+        return doesDamage;
+    }
+    protected boolean doesDamage;
     
-    public Tile(int id, boolean solid, boolean destructible, int levelColour)
+    public Tile(int id, boolean solid, boolean destructible, boolean doesDamage, int levelColour)
     {
         this.id=(byte)id;
         if(tiles[id]!=null)
@@ -52,6 +58,8 @@ public abstract class Tile {
     public boolean isDestructible() {
         return destructible;
     }
-
+    
+    public abstract void tick();
+    
     public abstract void render(Screen screen, customLevel level, int x, int y);
 }

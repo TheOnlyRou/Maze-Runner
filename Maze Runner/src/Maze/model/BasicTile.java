@@ -12,14 +12,9 @@ public class BasicTile extends Tile{
     protected int tileID;
     protected int tileColour;
 
-    public BasicTile(int id, boolean solid, boolean destructible, int levelColour) {
-        super(id, solid, destructible,levelColour);
-    }
-    
-
     public BasicTile(int id, int x, int y, int tileColour, int levelColour) {
-        super(id, false, false,levelColour);
-        this.tileID= x+y; 
+        super(id, false, false, false,levelColour);
+        this.tileID= x+y*32; 
         //This is different from the tile's ID in the tiles array
         this.tileColour=tileColour;
     }    
@@ -27,6 +22,10 @@ public class BasicTile extends Tile{
     @Override
     public void render(Screen screen, customLevel level, int x, int y) {
         screen.render(x, y, tileID, tileColour);
+    }
+
+    @Override
+    public void tick() {
     }
     
 }

@@ -68,9 +68,9 @@ public class GameWindow extends Canvas implements Runnable{
                 }
             }
         }
-        screen = new Screen(WIDTH,HEIGHT,new SpriteSheet("\\SpriteSheet9.png"));
+        screen = new Screen(WIDTH,HEIGHT,new SpriteSheet("\\SpriteSheetV2.png"));
         input = new InputHandler(this);
-        level = new customLevel("\\levels\\Level1.png");
+        level = new customLevel("\\levels\\Level2.png");
         player = new Player(level,0,0,input);
         level.addEntity(player);
     }    
@@ -138,19 +138,14 @@ public class GameWindow extends Canvas implements Runnable{
     
     public void tick()
     {
-	tickCount++;    
-        if(input.space.isPressed())
-        {
-            /* PEW PEW PEW */
-            System.out.println("space");
-        }
+	tickCount++;
         if(input.p.isPressed())
         {
             /* pause pls */
             System.out.println("pause");
         }        
 
-        level.tick();
+        level.tick(); 
     }
     
     
