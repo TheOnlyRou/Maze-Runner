@@ -5,18 +5,15 @@
  */
 package Maze.controller;
 
-import Maze.view.MainWindow;
-
 /**
  *
  * @author user
  */
-public class GameStart implements State {
+public class GameLost implements State {
 
     @Override
     public void execute() {
-        MainWindow window = MainWindow.getInstance();
-        window.setVisible(true);
+        
     }
     
 }

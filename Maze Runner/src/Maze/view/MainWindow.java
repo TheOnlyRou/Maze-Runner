@@ -33,7 +33,6 @@ public class MainWindow extends javax.swing.JFrame {
     private MainWindow() {
         
         this.setVisible(true);
-        
         setIconImage(new ImageIcon(getClass().getResource("icon.png")).getImage());
         add(game);
         pack();
@@ -58,7 +57,14 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1.setVisible(true);
         System.out.println("pause");
     }
-
+    
+    public void winner()
+    {
+        game.stop();
+        game.setVisible(false);
+        jPanel2.setVisible(isRunning);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,6 +77,9 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
         jProgressBar2 = new javax.swing.JProgressBar();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -106,6 +115,30 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().add(jProgressBar2);
         jProgressBar2.setBounds(450, 50, 152, 30);
 
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.setLayout(null);
+
+        jLabel14.setFont(new java.awt.Font("Minecraft", 0, 36)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("WINNER WINNER CHICKEN DINNER");
+        jPanel2.add(jLabel14);
+        jLabel14.setBounds(70, 160, 560, 170);
+
+        jLabel15.setFont(new java.awt.Font("Minecraft", 0, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Click here to quit");
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel15MousePressed(evt);
+            }
+        });
+        jPanel2.add(jLabel15);
+        jLabel15.setBounds(220, 350, 240, 90);
+
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(10, 160, 700, 500);
+
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(null);
 
@@ -123,14 +156,24 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Minecraft", 0, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("How to Play");
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel12MousePressed(evt);
+            }
+        });
         jPanel1.add(jLabel12);
         jLabel12.setBounds(282, 243, 135, 25);
 
         jLabel13.setFont(new java.awt.Font("Minecraft", 0, 24)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Back to Main Menu");
+        jLabel13.setText("Quit");
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel13MousePressed(evt);
+            }
+        });
         jPanel1.add(jLabel13);
-        jLabel13.setBounds(245, 283, 209, 25);
+        jLabel13.setBounds(325, 283, 50, 25);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(10, 160, 700, 500);
@@ -179,11 +222,28 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MousePressed
+        unpause();
+    }//GEN-LAST:event_jLabel11MousePressed
+
+    public void unpause()
+    {
         game.start();
         game.setVisible(true);
         jPanel1.setVisible(false);
         game.requestFocus();
-    }//GEN-LAST:event_jLabel11MousePressed
+    }
+    
+    private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel12MousePressed
+
+    private void jLabel13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MousePressed
+        System.exit(0);
+    }//GEN-LAST:event_jLabel13MousePressed
+
+    private void jLabel15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MousePressed
+        System.exit(0);
+    }//GEN-LAST:event_jLabel15MousePressed
 
    
     private void HideAll()
@@ -273,6 +333,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -282,6 +344,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JProgressBar jProgressBar2;
     // End of variables declaration//GEN-END:variables

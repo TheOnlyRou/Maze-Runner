@@ -11,12 +11,11 @@ import Maze.view.MainWindow;
  *
  * @author user
  */
-public class GameStart implements State {
+public class GameWon implements State {
 
     @Override
     public void execute() {
-        MainWindow window = MainWindow.getInstance();
-        window.setVisible(true);
+        MainWindow.getInstance().winner();
     }
     
 }

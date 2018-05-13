@@ -5,6 +5,7 @@
  */
 package Maze.model.entities;
 
+import Maze.controller.GameWon;
 import Maze.model.Tile;
 import Maze.model.customLevel;
 import Maze.view.GFX.Screen;
@@ -70,6 +71,16 @@ public abstract class MovingEntity extends Entity{
        {
            return true;
            
+       }
+       
+       if(!lastTile.equals(newTile) && newTile.doesDamage())
+       {
+            
+       }
+       if(lastTile.isHasWon())
+       {
+           GameWon winner = new GameWon();
+           winner.execute();
        }
         
         return false;

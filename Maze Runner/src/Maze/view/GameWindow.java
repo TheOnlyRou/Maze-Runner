@@ -3,7 +3,9 @@
  */
 package Maze.view;
 
+import Maze.controller.GamePaused;
 import Maze.controller.InputHandler;
+import Maze.model.Tile;
 import Maze.view.GFX.Colours;
 import Maze.view.GFX.Font;
 import Maze.view.GFX.Screen;
@@ -30,6 +32,8 @@ public class GameWindow extends Canvas implements Runnable{
     public static final int SCALE = 3;
     public boolean running=false;
     public int tickCount=0;
+    private boolean firsttime=true;
+    private int x,y;
     
     private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
     private int[] pixels= ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
@@ -50,7 +54,7 @@ public class GameWindow extends Canvas implements Runnable{
         setPreferredSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));        
     }
     
-    public void init()
+    public void init(int x, int y)
     {
         int index= 0;
         for(int r = 0; r<6 ;r++)
@@ -70,8 +74,8 @@ public class GameWindow extends Canvas implements Runnable{
         }
         screen = new Screen(WIDTH,HEIGHT,new SpriteSheet("\\SpriteSheetV2.png"));
         input = new InputHandler(this);
-        level = new customLevel("\\levels\\Level2.png");
-        player = new Player(level,0,0,input);
+        level = new customLevel("\\levels\\LevelTest.png");
+        player = new Player(level,x,y,input);
         level.addEntity(player);
     }    
     
@@ -101,8 +105,13 @@ public class GameWindow extends Canvas implements Runnable{
         
         int frames=0;
         int ticks = 0;
-        
-        init();
+        if(firsttime==true)
+        {
+            init(0,0);
+            firsttime=false;
+        }
+        else
+            init(player.getX(),player.getY());
         while(running)
         {
             long now = System.nanoTime();   
@@ -142,10 +151,9 @@ public class GameWindow extends Canvas implements Runnable{
 	tickCount++;
         if(input.p.isPressed())
         {
-            MainWindow.getInstance().pause();
-            System.out.println("pause");
+            GamePaused pause = new GamePaused();
+            pause.execute();
         }        
-
         level.tick(); 
     }
     

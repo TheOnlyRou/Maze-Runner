@@ -20,6 +20,7 @@ public class MainMenu extends javax.swing.JFrame {
      * Creates new form MainMenu
      */
     public MainMenu() {
+        this.setVisible(true);
         setIconImage(new ImageIcon(getClass().getResource("icon.png")).getImage());
         initComponents();
         setResizable(false);

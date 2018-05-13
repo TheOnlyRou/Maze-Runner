@@ -79,10 +79,6 @@ public class Player extends MovingEntity {
         Tile lastTile= level.getTile((this.x+x)>>3,(this.y+y)>>3);
         Tile newTile= level.getTile((this.x+x +xa)>>3,(this.y+y+ya)>>3);
         
-        if(!lastTile.equals(newTile) && newTile.doesDamage())
-        {
-            
-        }
     }
     
     
