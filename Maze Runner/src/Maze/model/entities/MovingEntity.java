@@ -10,6 +10,7 @@ import Maze.model.Tile;
 import Maze.model.customLevel;
 import Maze.view.GFX.Screen;
 import Maze.view.HPObserver;
+import Maze.view.ArmorObserver;
 
 /**
  *
@@ -70,8 +71,21 @@ public abstract class MovingEntity extends Entity{
         
        if(!lastTile.equals(newTile) && newTile.doesDamage())
        {
-            System.out.println(newTile.getDamage());
             HPObserver hp = new HPObserver(newTile.getDamage(),false);
+       }
+       
+       if(!lastTile.equals(newTile) && newTile.isIsPickup())
+       {  
+            HPObserver hp;
+            ArmorObserver armor;
+            if(newTile==Tile.HP)
+            {
+                hp = new HPObserver(newTile.getHeal(),true);
+            }
+            else if(newTile==Tile.ARMOR)
+            {
+                armor = new ArmorObserver(newTile.getHeal());
+            }        
        }
        
        if(!lastTile.equals(newTile) && newTile.isSolid())

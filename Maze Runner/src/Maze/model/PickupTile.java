@@ -9,14 +9,13 @@ package Maze.model;
  *
  * @author user
  */
-public class BombTile extends StoneTile{
+public class PickupTile extends BasicTile{
     
-    public static final int DAMAGE=50;
-    
-    public BombTile(int id, int x, int y, int tileColour, int levelColour) {
+    public PickupTile(int id, int x, int y, int tileColour, int levelColour) {
         super(id, x, y, tileColour, levelColour);
-        this.destructible=true;
-        this.doesDamage=true;
-        this.damage=30;
+        this.heal=50;
+        this.isPickup=true;
     }
+    
+    
 }

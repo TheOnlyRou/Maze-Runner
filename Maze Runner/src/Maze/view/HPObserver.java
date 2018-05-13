@@ -29,7 +29,7 @@ public class HPObserver extends Observer{
         }
         else
         {
-            System.out.println("inflicting damage" + change);
+            System.out.println("inflicting damage " + change);
             MainWindow.getInstance().inflictDamage(change);
         }
     }

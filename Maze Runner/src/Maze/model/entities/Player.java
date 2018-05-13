@@ -11,6 +11,7 @@ import Maze.model.customLevel;
 import Maze.view.GFX.Colours;
 import Maze.view.GFX.Screen;
 import Maze.view.MainWindow;
+import java.io.File;
 
 /**
  *
@@ -71,22 +72,12 @@ public class Player extends MovingEntity {
         
         return false;
     }
-    
-    @Override
-    public void move(int xa, int ya){
-        super.move(xa, ya);
-
-        Tile lastTile= level.getTile((this.x+x)>>3,(this.y+y)>>3);
-        Tile newTile= level.getTile((this.x+x +xa)>>3,(this.y+y+ya)>>3);
-        
-    }
-    
-    
 
     @Override
     public void tick() {
         int xa=0;
         int ya=0;
+        SoundDecorator d = new SoundDecorator(this.level,this.x,this.y,this.input);
         
         if(input.up.isPressed())
         {
@@ -113,7 +104,9 @@ public class Player extends MovingEntity {
         }
         if(xa!=0 || ya!=0)
         {
+            File walk = new File("walk.wave");
             move(xa,ya);
+            d.playSound(walk);
             isMoving=true;
         }
         else{

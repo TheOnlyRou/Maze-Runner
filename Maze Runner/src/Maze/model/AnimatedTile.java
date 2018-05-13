@@ -26,7 +26,7 @@ public class AnimatedTile extends StoneTile {
         this.lastIterationTime=System.currentTimeMillis();
         this.delay=delay;
         this.doesDamage=true;
-        this.damage=100;
+        this.damage=10;
     }
     
     @Override

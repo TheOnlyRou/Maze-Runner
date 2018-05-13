@@ -8,11 +8,16 @@ package Maze.view;
 import Maze.controller.GameLost;
 import Maze.controller.InputHandler;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import static java.lang.Math.abs;
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 /**
  *
@@ -25,8 +30,12 @@ public class MainWindow extends javax.swing.JFrame {
     private int hp=100;
     private int armor=0;
     private boolean isRunning=true;
-    
+    private Timer _timer;
+    private DateFormat _fmt = DateFormat.getTimeInstance(DateFormat.LONG);
+    private Calendar _calendar = Calendar.getInstance();
+    private TimerLabel timer = new TimerLabel();
     private static MainWindow instance = new MainWindow();
+    
     
     public static MainWindow getInstance(){
       return instance;
@@ -35,17 +44,21 @@ public class MainWindow extends javax.swing.JFrame {
     private MainWindow() {
         
         this.setVisible(true);
+        this.add(timer);
         setIconImage(new ImageIcon(getClass().getResource("icon.png")).getImage());
-        add(game);
+      /*add(game);
         pack();
         game.setBounds(10,160, 700, 500);
         game.setVisible(true);
         game.start();
-        setResizable(false);
-        setLocationRelativeTo(null);
         game.requestFocus();
+        */
+        setResizable(false);
+        setLocationRelativeTo(null);        
         initComponents();
         jPanel1.setVisible(false);
+        jPanel3.setVisible(false);
+        jPanel2.setVisible(false);
         jProgressBar1.setValue(100);
         jProgressBar2.setValue(0);
     }
@@ -89,6 +102,7 @@ public class MainWindow extends javax.swing.JFrame {
         }        
         
     }
+   
     
     public void Heal(int heal)
     {
@@ -153,12 +167,6 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -272,39 +280,15 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Minecraft", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Bullets");
+        jLabel4.setText("Time");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(220, 100, 124, 37);
+        jLabel4.setBounds(220, 100, 400, 37);
 
         jLabel3.setFont(new java.awt.Font("Minecraft", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Armor");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(340, 50, 110, 37);
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bullets.png"))); // NOI18N
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(350, 102, 32, 30);
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bullets.png"))); // NOI18N
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(365, 102, 32, 30);
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bullets.png"))); // NOI18N
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(380, 102, 32, 30);
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bullets.png"))); // NOI18N
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(395, 102, 32, 30);
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bullets.png"))); // NOI18N
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(410, 102, 32, 30);
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bullets.png"))); // NOI18N
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(425, 102, 32, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/UIBACK.jpg"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -347,85 +331,19 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel2.setVisible(false);
         jLabel3.setVisible(false);
         jLabel4.setVisible(false);
-        jLabel5.setVisible(false);
-        jLabel6.setVisible(false);
-        jLabel7.setVisible(false);
-        jLabel8.setVisible(false);
-        jLabel9.setVisible(false);
-        jLabel10.setVisible(false);
         jProgressBar1.setVisible(false);
         jProgressBar2.setVisible(false);
         
     }
     
 
-    public void setBullets(int bullets)
-    {
-        switch(bullets){
-            case 0:
-                jLabel5.setVisible(false);
-                jLabel6.setVisible(false);
-                jLabel7.setVisible(false);
-                jLabel8.setVisible(false);
-                jLabel9.setVisible(false);
-                jLabel10.setVisible(false);
-                break;
-            case 1:
-                jLabel5.setVisible(true);
-                jLabel6.setVisible(false);
-                jLabel7.setVisible(false);
-                jLabel8.setVisible(false);
-                jLabel9.setVisible(false);
-                jLabel10.setVisible(false);
-            case 2:
-                jLabel5.setVisible(true);
-                jLabel6.setVisible(true);
-                jLabel7.setVisible(false);
-                jLabel8.setVisible(false);
-                jLabel9.setVisible(false);
-                jLabel10.setVisible(false);
-                break;
-            case 3:
-                jLabel5.setVisible(true);
-                jLabel6.setVisible(true);
-                jLabel7.setVisible(true);
-                jLabel8.setVisible(false);
-                jLabel9.setVisible(false);
-                jLabel10.setVisible(false);
-                break;
-            case 4:
-                jLabel5.setVisible(true);
-                jLabel6.setVisible(true);
-                jLabel7.setVisible(true);
-                jLabel8.setVisible(true);
-                jLabel9.setVisible(false);
-                jLabel10.setVisible(false);
-                break;
-            case 5:
-                jLabel5.setVisible(true);
-                jLabel6.setVisible(true);
-                jLabel7.setVisible(true);
-                jLabel8.setVisible(true);
-                jLabel9.setVisible(true);
-                jLabel10.setVisible(false);
-                break;
-            case 6:
-                jLabel5.setVisible(true);
-                jLabel6.setVisible(true);
-                jLabel7.setVisible(true);
-                jLabel8.setVisible(true);
-                jLabel9.setVisible(true);
-                jLabel10.setVisible(true);
-                break;                
-        }
-    }
+    
         
     
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -436,11 +354,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

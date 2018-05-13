@@ -79,7 +79,7 @@ public class GameWindow extends Canvas implements Runnable{
                 }
             }
         }
-        screen = new Screen(WIDTH,HEIGHT,new SpriteSheet("\\SpriteSheetV2.png"));
+        screen = new Screen(WIDTH,HEIGHT,new SpriteSheet("\\SpriteSheetV3.png"));
         input = new InputHandler(this);
         level = new customLevel("\\levels\\LevelTest.png");
         player = new Player(level,x,y,input);
