@@ -5,7 +5,9 @@
  */
 package Maze.view;
 
+import Maze.controller.InputHandler;
 import java.awt.BorderLayout;
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -17,10 +19,21 @@ import javax.swing.ImageIcon;
 public class MainWindow extends javax.swing.JFrame {
 
     GameWindow game = new GameWindow();
+    InputHandler input = new InputHandler(this.game);
+    private int hp;
+    private int armor;
+    private boolean isRunning=true;
     
-    public MainWindow() throws InterruptedException {
+    private static MainWindow instance = new MainWindow();
+    
+    public static MainWindow getInstance(){
+      return instance;
+   }
+    
+    private MainWindow() {
         
         this.setVisible(true);
+        
         setIconImage(new ImageIcon(getClass().getResource("icon.png")).getImage());
         add(game);
         pack();
@@ -31,12 +44,20 @@ public class MainWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         game.requestFocus();
         initComponents();
+        jPanel1.setVisible(false);
         jProgressBar1.setValue(100);
         jProgressBar2.setValue(100);
-
     }
-
     
+    
+    
+    public void pause()
+    {
+        game.stop();
+        game.setVisible(false);
+        jPanel1.setVisible(true);
+        System.out.println("pause");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,6 +71,10 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
         jProgressBar2 = new javax.swing.JProgressBar();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -80,6 +105,35 @@ public class MainWindow extends javax.swing.JFrame {
         jProgressBar2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(jProgressBar2);
         jProgressBar2.setBounds(450, 50, 152, 30);
+
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setLayout(null);
+
+        jLabel11.setFont(new java.awt.Font("Minecraft", 0, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Resume");
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel11MousePressed(evt);
+            }
+        });
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(308, 203, 84, 25);
+
+        jLabel12.setFont(new java.awt.Font("Minecraft", 0, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("How to Play");
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(282, 243, 135, 25);
+
+        jLabel13.setFont(new java.awt.Font("Minecraft", 0, 24)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Back to Main Menu");
+        jPanel1.add(jLabel13);
+        jLabel13.setBounds(245, 283, 209, 25);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(10, 160, 700, 500);
 
         jLabel4.setFont(new java.awt.Font("Minecraft", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,6 +177,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MousePressed
+        game.start();
+        game.setVisible(true);
+        jPanel1.setVisible(false);
+        game.requestFocus();
+    }//GEN-LAST:event_jLabel11MousePressed
 
    
     private void HideAll()
@@ -200,8 +261,6 @@ public class MainWindow extends javax.swing.JFrame {
                 jLabel9.setVisible(true);
                 jLabel10.setVisible(true);
                 break;                
-                
-                
         }
     }
         
@@ -211,6 +270,9 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -219,6 +281,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JProgressBar jProgressBar2;
     // End of variables declaration//GEN-END:variables

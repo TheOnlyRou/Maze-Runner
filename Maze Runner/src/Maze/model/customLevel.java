@@ -38,7 +38,7 @@ public class customLevel {
             this.height = 64;
             this.levelPath=levelPath;
             tiles= new byte [width*height];
-            this.generateLevel();
+            
         }
     }
     

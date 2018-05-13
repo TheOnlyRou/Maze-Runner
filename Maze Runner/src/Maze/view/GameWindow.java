@@ -43,7 +43,7 @@ public class GameWindow extends Canvas implements Runnable{
     
     public customLevel level;
     
-    public GameWindow() throws InterruptedException
+    public GameWindow()
     {
         setMinimumSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
         setMaximumSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
@@ -138,10 +138,11 @@ public class GameWindow extends Canvas implements Runnable{
     
     public void tick()
     {
+        MainWindow window = MainWindow.getInstance();
 	tickCount++;
         if(input.p.isPressed())
         {
-            /* pause pls */
+            MainWindow.getInstance().pause();
             System.out.println("pause");
         }        
 

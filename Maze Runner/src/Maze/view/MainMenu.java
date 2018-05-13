@@ -5,6 +5,7 @@
  */
 package Maze.view;
 
+import Maze.controller.GameStart;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -135,11 +136,8 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel12MouseEntered
 
     private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
-        try {
-            MainWindow main = new MainWindow();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        GameStart start = new GameStart();
+        start.execute();
         this.setVisible(false);
     }//GEN-LAST:event_jLabel12MousePressed
 
