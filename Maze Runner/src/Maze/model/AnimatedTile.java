@@ -18,6 +18,7 @@ public class AnimatedTile extends StoneTile {
     private long lastIterationTime;
     private int delay;
     
+    
     public AnimatedTile(int id, int[][]animationCoords, int tileColour, int levelColour, int delay) {
         super(id, animationCoords[0][0], animationCoords[0][1], tileColour, levelColour);
         this.animationTileCoords = animationCoords;
@@ -25,6 +26,7 @@ public class AnimatedTile extends StoneTile {
         this.lastIterationTime=System.currentTimeMillis();
         this.delay=delay;
         this.doesDamage=true;
+        this.damage=100;
     }
     
     @Override

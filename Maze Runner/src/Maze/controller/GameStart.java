@@ -15,8 +15,7 @@ public class GameStart implements State {
 
     @Override
     public void execute() {
-        MainWindow window = MainWindow.getInstance();
-        window.setVisible(true);
+        MainWindow.getInstance().setVisible(true);
     }
     
 }

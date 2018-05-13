@@ -9,6 +9,7 @@ import Maze.controller.GameWon;
 import Maze.model.Tile;
 import Maze.model.customLevel;
 import Maze.view.GFX.Screen;
+import Maze.view.HPObserver;
 
 /**
  *
@@ -67,16 +68,17 @@ public abstract class MovingEntity extends Entity{
         Tile lastTile= level.getTile((this.x+x)>>3,(this.y+y)>>3);
         Tile newTile= level.getTile((this.x+x +xa)>>3,(this.y+y+ya)>>3);
         
-       if(!lastTile.equals(newTile) && newTile.isSolid())
-       {
-           return true;
-           
-       }
-       
        if(!lastTile.equals(newTile) && newTile.doesDamage())
        {
-            
+            System.out.println(newTile.getDamage());
+            HPObserver hp = new HPObserver(newTile.getDamage(),false);
        }
+       
+       if(!lastTile.equals(newTile) && newTile.isSolid())
+       {
+           return true;    
+       }
+
        if(lastTile.isHasWon())
        {
            GameWon winner = new GameWon();

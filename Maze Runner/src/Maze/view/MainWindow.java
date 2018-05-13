@@ -5,9 +5,11 @@
  */
 package Maze.view;
 
+import Maze.controller.GameLost;
 import Maze.controller.InputHandler;
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
+import static java.lang.Math.abs;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -18,10 +20,10 @@ import javax.swing.ImageIcon;
  */
 public class MainWindow extends javax.swing.JFrame {
 
-    GameWindow game = new GameWindow();
+    GameWindow game = GameWindow.getInstance();
     InputHandler input = new InputHandler(this.game);
-    private int hp;
-    private int armor;
+    private int hp=100;
+    private int armor=0;
     private boolean isRunning=true;
     
     private static MainWindow instance = new MainWindow();
@@ -45,9 +47,64 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
         jPanel1.setVisible(false);
         jProgressBar1.setValue(100);
-        jProgressBar2.setValue(100);
+        jProgressBar2.setValue(0);
     }
     
+    
+    public void inflictDamage(int damage)
+    {
+        armor = jProgressBar2.getValue();
+        hp = jProgressBar1.getValue();
+        if(armor>0)
+        {
+            armor-=damage;
+            damage=0;
+            if(armor<0)
+            {
+                damage=abs(armor);
+                armor=0;
+            }
+            jProgressBar2.setValue(armor);
+            if(damage>0)
+            {
+                hp-=damage;
+                if(hp<0)
+                {
+                    GameLost lost = new GameLost();
+                    lost.execute();
+                }
+                jProgressBar1.setValue(hp);
+            }
+        }
+        else
+        {
+            hp-=damage;
+            if(hp<0)
+            {
+                GameLost lost = new GameLost();
+                lost.execute();
+            }
+            else
+                jProgressBar1.setValue(hp);
+        }        
+        
+    }
+    
+    public void Heal(int heal)
+    {
+        hp +=heal;
+        if(hp>100)
+            hp=100;
+        jProgressBar1.setValue(hp);
+    }
+    
+    public void AddArmor(int arm)
+    {
+        armor +=arm;
+        if(armor>100)
+            armor=100;
+        jProgressBar2.setValue(armor);
+    }
     
     
     public void pause()
@@ -62,7 +119,14 @@ public class MainWindow extends javax.swing.JFrame {
     {
         game.stop();
         game.setVisible(false);
-        jPanel2.setVisible(isRunning);
+        jPanel2.setVisible(true);
+    }
+    
+    public void lost()
+    {
+        game.stop();
+        game.setVisible(false);
+        jPanel3.setVisible(true);
     }
     
     /**
@@ -77,6 +141,9 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
         jProgressBar2 = new javax.swing.JProgressBar();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -114,6 +181,31 @@ public class MainWindow extends javax.swing.JFrame {
         jProgressBar2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(jProgressBar2);
         jProgressBar2.setBounds(450, 50, 152, 30);
+
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel3.setLayout(null);
+
+        jLabel16.setFont(new java.awt.Font("Minecraft", 0, 36)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/DIED.png"))); // NOI18N
+        jPanel3.add(jLabel16);
+        jLabel16.setBounds(70, 40, 560, 290);
+
+        jLabel17.setFont(new java.awt.Font("Minecraft", 0, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("Click here to quit");
+        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel17MousePressed(evt);
+            }
+        });
+        jPanel3.add(jLabel17);
+        jLabel17.setBounds(220, 350, 240, 90);
+
+        getContentPane().add(jPanel3);
+        jPanel3.setBounds(10, 160, 700, 500);
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setLayout(null);
@@ -245,6 +337,10 @@ public class MainWindow extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jLabel15MousePressed
 
+    private void jLabel17MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MousePressed
+        System.exit(0);
+    }//GEN-LAST:event_jLabel17MousePressed
+
    
     private void HideAll()
     {
@@ -335,6 +431,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -345,6 +443,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JProgressBar jProgressBar2;
     // End of variables declaration//GEN-END:variables

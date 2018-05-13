@@ -27,7 +27,12 @@ public abstract class Tile {
     protected byte id;
     protected boolean solid;
     protected boolean destructible;
+
+    public int getDamage() {
+        return damage;
+    }
     protected boolean hasWon;
+    protected int damage;
 
     public boolean isHasWon() {
         return hasWon;

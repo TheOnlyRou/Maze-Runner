@@ -3,19 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Maze.controller;
-
-import Maze.view.MainWindow;
+package Maze.view;
 
 /**
  *
  * @author user
  */
-public class GameLost implements State {
-
-    @Override
-    public void execute() {
-        MainWindow.getInstance().lost();
-    }
-    
+public abstract class Observer {
+    protected GameWindow game = GameWindow.getInstance();
+    public abstract void update();
 }

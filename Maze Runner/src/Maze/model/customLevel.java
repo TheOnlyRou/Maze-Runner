@@ -105,6 +105,7 @@ public class customLevel {
     {
         if(0>x || x>=width || 0>y || y>=height)
         {
+            TileFactory factory = new TileFactory();            
             return Tile.VOID;
         }
         return Tile.tiles[tiles[x+y*width]];
@@ -150,7 +151,8 @@ public class customLevel {
                 {
                     if(t.getLevelColour() == tileColours[x+y*width])
                     {
-                        this.tiles[x+y*width]=t.getID();
+
+                        this.tiles[x+y*width]= t.id;
                         break tileCheck;
                     }
                 }

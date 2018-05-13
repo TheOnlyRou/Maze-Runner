@@ -17,5 +17,6 @@ public class BombTile extends StoneTile{
         super(id, x, y, tileColour, levelColour);
         this.destructible=true;
         this.doesDamage=true;
+        this.damage=50;
     }
 }

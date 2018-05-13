@@ -47,7 +47,14 @@ public class GameWindow extends Canvas implements Runnable{
     
     public customLevel level;
     
-    public GameWindow()
+    
+    private static GameWindow instance = new GameWindow();
+    
+    public static GameWindow getInstance(){
+      return instance;
+   }
+    
+    private GameWindow()
     {
         setMinimumSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
         setMaximumSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
@@ -126,7 +133,7 @@ public class GameWindow extends Canvas implements Runnable{
                 permRender=true;
             }
             try {
-                Thread.sleep(2);
+                Thread.sleep(5);
             } catch (InterruptedException ex) {
                 Logger.getLogger(GameWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
